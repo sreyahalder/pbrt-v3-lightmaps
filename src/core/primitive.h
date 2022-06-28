@@ -44,6 +44,7 @@
 #include "material.h"
 #include "medium.h"
 #include "transform.h"
+#include "shapes/triangle.h"
 
 namespace pbrt {
 
@@ -53,6 +54,9 @@ class Primitive {
     // Primitive Interface
     virtual ~Primitive();
     virtual Bounds3f WorldBound() const = 0;
+    virtual std::vector<std::shared_ptr<Primitive>> GetPrimitives() const = 0;
+    virtual int NumTriangles() const = 0;
+    virtual bool IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const = 0;
     virtual bool Intersect(const Ray &r, SurfaceInteraction *) const = 0;
     virtual bool IntersectP(const Ray &r) const = 0;
     virtual const AreaLight *GetAreaLight() const = 0;
@@ -61,6 +65,7 @@ class Primitive {
                                             MemoryArena &arena,
                                             TransportMode mode,
                                             bool allowMultipleLobes) const = 0;
+    virtual Spectrum ComputeLightMap(SurfaceInteraction &isect) const = 0;
 };
 
 // GeometricPrimitive Declarations
@@ -68,6 +73,9 @@ class GeometricPrimitive : public Primitive {
   public:
     // GeometricPrimitive Public Methods
     virtual Bounds3f WorldBound() const;
+    virtual std::vector<std::shared_ptr<Primitive>> GetPrimitives() const;
+    virtual int NumTriangles() const;
+    virtual bool IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const;
     virtual bool Intersect(const Ray &r, SurfaceInteraction *isect) const;
     virtual bool IntersectP(const Ray &r) const;
     GeometricPrimitive(const std::shared_ptr<Shape> &shape,
@@ -79,6 +87,8 @@ class GeometricPrimitive : public Primitive {
     void ComputeScatteringFunctions(SurfaceInteraction *isect,
                                     MemoryArena &arena, TransportMode mode,
                                     bool allowMultipleLobes) const;
+    Spectrum ComputeLightMap(SurfaceInteraction &isect) const;
+
 
   private:
     // GeometricPrimitive Private Data
@@ -86,6 +96,7 @@ class GeometricPrimitive : public Primitive {
     std::shared_ptr<Material> material;
     std::shared_ptr<AreaLight> areaLight;
     MediumInterface mediumInterface;
+    std::shared_ptr<Texture<Spectrum>> lightMap;
 };
 
 // TransformedPrimitive Declarations
@@ -94,6 +105,9 @@ class TransformedPrimitive : public Primitive {
     // TransformedPrimitive Public Methods
     TransformedPrimitive(std::shared_ptr<Primitive> &primitive,
                          const AnimatedTransform &PrimitiveToWorld);
+    std::vector<std::shared_ptr<Primitive>> GetPrimitives() const;
+    int NumTriangles() const;
+    bool IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const;
     bool Intersect(const Ray &r, SurfaceInteraction *in) const;
     bool IntersectP(const Ray &r) const;
     const AreaLight *GetAreaLight() const { return nullptr; }
@@ -105,6 +119,10 @@ class TransformedPrimitive : public Primitive {
             "TransformedPrimitive::ComputeScatteringFunctions() shouldn't be "
             "called";
     }
+    Spectrum ComputeLightMap(SurfaceInteraction &isect) const {
+      return {};
+    };
+
     Bounds3f WorldBound() const {
         return PrimitiveToWorld.MotionBounds(primitive->WorldBound());
     }
@@ -124,6 +142,9 @@ class Aggregate : public Primitive {
     void ComputeScatteringFunctions(SurfaceInteraction *isect,
                                     MemoryArena &arena, TransportMode mode,
                                     bool allowMultipleLobes) const;
+    Spectrum ComputeLightMap(SurfaceInteraction &isect) const {
+      return {};
+    };
 };
 
 }  // namespace pbrt

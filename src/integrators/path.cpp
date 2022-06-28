@@ -39,6 +39,12 @@
 #include "paramset.h"
 #include "scene.h"
 #include "stats.h"
+#include "shapes/triangle.h"
+#include "film.h"
+#include "paramset.h"
+#include "imageio.h"
+#include "stats.h"
+#include "sampling.h"
 
 namespace pbrt {
 
@@ -57,8 +63,133 @@ PathIntegrator::PathIntegrator(int maxDepth,
       lightSampleStrategy(lightSampleStrategy) {}
 
 void PathIntegrator::Preprocess(const Scene &scene, Sampler &sampler) {
+    std::cout << "Generating light map..." << std::endl;
     lightDistribution =
         CreateLightSampleDistribution(lightSampleStrategy, scene);
+
+    return;
+
+    MemoryArena arena;
+    std::vector<std::shared_ptr<Primitive>> primitives = scene.GetPrimitives();
+    std::unique_ptr<Sampler> mapSampler = sampler.Clone(1);
+    int res = 512;
+    Bounds2i texBounds(Point2i(0, 0), Point2i(res, res));
+    Point2i resolution(res, res);
+
+    // std::cout << "There are " << primitives.size() << " primitives in this scene." << std::endl;
+    // for (int k = 0; k < primitives.size(); k++) {
+    //     std::cout << k << ": " << primitives[k]->NumTriangles() << std::endl;
+    // }
+
+    // int numMaps = 0;
+    // int primIdx = 0;
+    // while (primIdx < primitives.size()) {
+    //     int nTriangles = primitives[primIdx]->NumTriangles();
+    //     std::cout << "\tGenerating map " << numMaps << " for mesh with " << nTriangles
+    //         << " triangles\tidx " << primIdx << " to " << primIdx + nTriangles << std::endl;
+
+    //     std::unique_ptr<Float[]> rgb(new Float[3 * texBounds.Area()]);
+
+    //     for (int i = 0; i < res; i++) {
+    //         for (int j = 0; j < res; j++) {
+    //             // define texture (uv) coordinates
+    //             Point2f uv(i / Float(res), j / Float(res));
+    //             Point3f p;
+    //             SurfaceInteraction isect;
+
+    //             mapSampler->StartPixel(Point2i(i, j));
+
+    //             int u = (res - 1 - j);
+    //             int v = i;
+
+    //             rgb[3 * (res * u + v)] = 0;
+    //             rgb[3 * (res * u + v) + 1] = 0;
+    //             rgb[3 * (res * u + v) + 2] = 0;
+
+    //             for (int idx = primIdx; idx < primIdx + nTriangles; idx++) {
+    //                 if (primitives[idx]->IntersectUV(uv, &p, &isect)) {
+    //                     do {
+    //                         // calculate and store direct lighting
+    //                         const Distribution1D *distrib = lightDistribution->Lookup(isect.p);
+    //                         Spectrum Ld = JustDirect(isect, scene, arena, *mapSampler, false, distrib);
+
+    //                         // add cosine sampled indirect lighting
+    //                         Vector3f wo = Vector3f(isect.shading.n);
+    //                         Vector3f wi = CosineSampleHemisphere(mapSampler->Get2D());
+    //                         if (wo.z < 0) wi.z *= -1;
+    //                         RayDifferential ray = isect.SpawnRay(wi);
+    //                         Ld += AbsDot(wi, isect.shading.n) * Li(ray, scene, *mapSampler, arena, 3);
+
+    //                         rgb[3 * (res * u + v)] += Ld[0];
+    //                         rgb[3 * (res * u + v) + 1] += Ld[1];
+    //                         rgb[3 * (res * u + v) + 2] += Ld[2];
+    //                     } while (mapSampler->StartNextSample());
+    //                     break;
+    //                 }
+    //             }
+
+    //             rgb[3 * (res * u + v)] /= 8;
+    //             rgb[3 * (res * u + v) + 1] /= 8;
+    //             rgb[3 * (res * u + v) + 2] /= 8;
+    //         }
+    //     }
+    //     pbrt::WriteImage("lm_" + std::to_string(numMaps) + ".png", &rgb[0], texBounds, resolution);
+    //     primIdx += nTriangles;
+    //     numMaps++;
+    // }
+
+
+    std::unique_ptr<Float[]> rgb(new Float[3 * texBounds.Area()]);
+    // loop over texels in texture
+    for (int i = 0; i < res; i++) {
+        for (int j = 0; j < res; j++) {
+            // define texture (uv) coordinates
+            Point2f uv(i / Float(res), j / Float(res));
+            Point3f p;
+            SurfaceInteraction isect;
+
+            mapSampler->StartPixel(Point2i(i, j));
+
+            int u = (res - 1 - j);
+            int v = i;
+
+            rgb[3 * (res * u + v)] = 0;
+            rgb[3 * (res * u + v) + 1] = 0;
+            rgb[3 * (res * u + v) + 2] = 0;
+
+            for (int idx = 2; idx < 4; idx++) {
+                if (primitives[idx]->IntersectUV(uv, &p, &isect)) {
+                    do {
+                        // calculate and store direct lighting
+                        const Distribution1D *distrib = lightDistribution->Lookup(isect.p);
+                        Spectrum Ld = JustDirect(isect, scene, arena, *mapSampler, false, distrib);
+
+                        // add cosine sampled indirect lighting
+                        Vector3f wo = Vector3f(isect.shading.n);
+                        Vector3f wi = CosineSampleHemisphere(mapSampler->Get2D());
+                        if (wo.z < 0) wi.z *= -1;
+                        RayDifferential ray = isect.SpawnRay(wi);
+                        Ld += AbsDot(wi, isect.shading.n) * Li(ray, scene, *mapSampler, arena, 3);
+
+                        // visualize world space
+                        Point3f viz = (isect.p + Point3f(1000, 1000, 1000)) / 2000.f;
+
+                        rgb[3 * (res * u + v)] += viz[0];
+                        rgb[3 * (res * u + v) + 1] += viz[1];
+                        rgb[3 * (res * u + v) + 2] += viz[2];
+                    } while (mapSampler->StartNextSample());
+                    break;
+                }
+            }
+
+            rgb[3 * (res * u + v)] /= 8;
+            rgb[3 * (res * u + v) + 1] /= 8;
+            rgb[3 * (res * u + v) + 2] /= 8;
+        }
+    }
+    pbrt::WriteImage("worldspace_lm.png", &rgb[0], texBounds, resolution);
+    arena.Reset();
+
 }
 
 Spectrum PathIntegrator::Li(const RayDifferential &r, const Scene &scene,
@@ -190,7 +321,7 @@ Spectrum PathIntegrator::Li(const RayDifferential &r, const Scene &scene,
 PathIntegrator *CreatePathIntegrator(const ParamSet &params,
                                      std::shared_ptr<Sampler> sampler,
                                      std::shared_ptr<const Camera> camera) {
-    int maxDepth = params.FindOneInt("maxdepth", 5);
+    int maxDepth = params.FindOneInt("maxdepth", 1);
     int np;
     const int *pb = params.FindInt("pixelbounds", &np);
     Bounds2i pixelBounds = camera->film->GetSampleBounds();

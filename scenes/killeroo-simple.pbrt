@@ -1,10 +1,10 @@
 
-LookAt 400 20 30   0 63 -110   0 0 1
+LookAt 150 500 10   0 -63 -110   0 0 1
 Rotate -5 0 0 1
 Camera "perspective" "float fov" [39]
 Film "image"  
 "integer xresolution" [700] "integer yresolution" [700]
-    "string filename" "killeroo-simple.exr"
+    "string filename" "killeroo-simple-angle-2-lm.png"
 
 # zoom in by feet
 # "integer xresolution" [1500] "integer yresolution" [1500]
@@ -24,15 +24,19 @@ AreaLightSource "area"  "color L" [2000 2000 2000] "integer nsamples" [8]
 Shape "sphere" "float radius" [3]
 AttributeEnd
 
+Texture "lightmap" "color" "imagemap" "string filename" "../build/killeroo/test_texture.png"
+Texture "lightmap2" "color" "imagemap" "string filename" "../build/killeroo/test_texture_wall.png"
 
 AttributeBegin
-  Material "matte" "color Kd" [.5 .5 .8]
+  # Material "matte" "color Kd" [.25 .25 .25]
+  Material "matte" "texture Kd" "lightmap"
   Translate 0 0 -140
 Shape "trianglemesh" "point P" [ -1000 -1000 0 1000 -1000 0 1000 1000 0 -1000 1000 0 ]
-      "float uv" [ 0 0 5 0 5 5 0 5 ]
+      "float uv" [ 0 0 1 0 1 1 0 1 ]
 	"integer indices" [ 0 1 2 2 3 0]
+    Material "matte" "texture Kd" "lightmap2"
 Shape "trianglemesh" "point P" [ -400 -1000 -1000   -400 1000 -1000   -400 1000 1000 -400 -1000 1000 ]
-      "float uv" [ 0 0 5 0 5 5 0 5 ]
+      "float uv" [ 0 0 1 0 1 1 0 1 ]
         "integer indices" [ 0 1 2 2 3 0]
 AttributeEnd
 

@@ -69,4 +69,8 @@ bool Scene::IntersectTr(Ray ray, Sampler &sampler, SurfaceInteraction *isect,
     }
 }
 
+std::vector<std::shared_ptr<Primitive>> Scene::GetPrimitives() const {
+  return aggregate->GetPrimitives();
+}
+
 }  // namespace pbrt

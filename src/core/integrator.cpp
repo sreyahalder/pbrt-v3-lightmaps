@@ -105,6 +105,57 @@ Spectrum UniformSampleOneLight(const Interaction &it, const Scene &scene,
                           scene, sampler, arena, handleMedia) / lightPdf;
 }
 
+Spectrum JustDirect(const Interaction &it, const Scene &scene,
+                    MemoryArena &arena, Sampler &sampler,
+                    bool handleMedia, const Distribution1D *lightDistrib) {
+    ProfilePhase p(Prof::DirectLighting);
+    // Randomly choose a single light to sample, _light_
+    int nLights = int(scene.lights.size());
+    if (nLights == 0) return Spectrum(0.f);
+    int lightNum;
+    Float elightPdf;
+    if (lightDistrib) {
+        lightNum = lightDistrib->SampleDiscrete(sampler.Get1D(), &elightPdf);
+        if (elightPdf == 0) return Spectrum(0.f);
+    } else {
+        lightNum = std::min((int)(sampler.Get1D() * nLights), nLights - 1);
+        elightPdf = Float(1) / nLights;
+    }
+    const std::shared_ptr<Light> &light = scene.lights[lightNum];
+    Point2f uLight = sampler.Get2D();
+
+    BxDFType bsdfFlags = BxDFType(BSDF_ALL & ~BSDF_SPECULAR);
+    Spectrum Ld(0.f);
+    // Sample light source with multiple importance sampling
+    Vector3f wi;
+    Float lightPdf = 0, scatteringPdf = 0;
+    VisibilityTester visibility;
+    Spectrum Li = light->Sample_Li(it, uLight, &wi, &lightPdf, &visibility);
+
+    if (lightPdf > 0 && !Li.IsBlack()) {
+        // Compute BSDF or phase function's value for light sample
+        Spectrum f;
+        if (it.IsSurfaceInteraction()) {
+            // Evaluate BSDF for light sampling strategy
+            const SurfaceInteraction &isect = (const SurfaceInteraction &)it;
+            f = AbsDot(wi, isect.shading.n);
+        }
+        if (!f.IsBlack()) {
+            // Compute effect of visibility for light source sample
+            if (!visibility.Unoccluded(scene)) {
+                Li = Spectrum(0.f);
+            }
+
+            // Add light's contribution to reflected radiance
+            if (!Li.IsBlack()) {
+                Float weight = PowerHeuristic(1, lightPdf, 1, scatteringPdf);
+                Ld += f * Li * weight / lightPdf;
+            }
+        }
+    }
+    return Ld / elightPdf;
+}
+
 Spectrum EstimateDirect(const Interaction &it, const Point2f &uScattering,
                         const Light &light, const Point2f &uLight,
                         const Scene &scene, Sampler &sampler,
@@ -119,14 +170,22 @@ Spectrum EstimateDirect(const Interaction &it, const Point2f &uScattering,
     Spectrum Li = light.Sample_Li(it, uLight, &wi, &lightPdf, &visibility);
     VLOG(2) << "EstimateDirect uLight:" << uLight << " -> Li: " << Li << ", wi: "
             << wi << ", pdf: " << lightPdf;
+    
+    // const SurfaceInteraction &isect = (const SurfaceInteraction &)it;
+    // Spectrum f;
+    // f = isect.bsdf->f(isect.wo, wi, bsdfFlags);
+    // Ld = f;
+    // return Ld;
+
     if (lightPdf > 0 && !Li.IsBlack()) {
         // Compute BSDF or phase function's value for light sample
         Spectrum f;
         if (it.IsSurfaceInteraction()) {
             // Evaluate BSDF for light sampling strategy
             const SurfaceInteraction &isect = (const SurfaceInteraction &)it;
-            f = isect.bsdf->f(isect.wo, wi, bsdfFlags) *
-                AbsDot(wi, isect.shading.n);
+            // f = isect.bsdf->f(isect.wo, wi, bsdfFlags) *
+            //     AbsDot(wi, isect.shading.n);
+            f = AbsDot(wi, isect.shading.n);
             scatteringPdf = isect.bsdf->Pdf(isect.wo, wi, bsdfFlags);
             VLOG(2) << "  surf f*dot :" << f << ", scatteringPdf: " << scatteringPdf;
         } else {

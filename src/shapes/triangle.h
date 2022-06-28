@@ -41,6 +41,7 @@
 // shapes/triangle.h*
 #include "shape.h"
 #include "stats.h"
+#include "shapes/trianglemesh.h"
 #include <map>
 
 namespace pbrt {
@@ -48,25 +49,25 @@ namespace pbrt {
 STAT_MEMORY_COUNTER("Memory/Triangle meshes", triMeshBytes);
 
 // Triangle Declarations
-struct TriangleMesh {
-    // TriangleMesh Public Methods
-    TriangleMesh(const Transform &ObjectToWorld, int nTriangles,
-                 const int *vertexIndices, int nVertices, const Point3f *P,
-                 const Vector3f *S, const Normal3f *N, const Point2f *uv,
-                 const std::shared_ptr<Texture<Float>> &alphaMask,
-                 const std::shared_ptr<Texture<Float>> &shadowAlphaMask,
-                 const int *faceIndices);
+// struct TriangleMesh {
+//     // TriangleMesh Public Methods
+//     TriangleMesh(const Transform &ObjectToWorld, int nTriangles,
+//                  const int *vertexIndices, int nVertices, const Point3f *P,
+//                  const Vector3f *S, const Normal3f *N, const Point2f *uv,
+//                  const std::shared_ptr<Texture<Float>> &alphaMask,
+//                  const std::shared_ptr<Texture<Float>> &shadowAlphaMask,
+//                  const int *faceIndices);
 
-    // TriangleMesh Data
-    const int nTriangles, nVertices;
-    std::vector<int> vertexIndices;
-    std::unique_ptr<Point3f[]> p;
-    std::unique_ptr<Normal3f[]> n;
-    std::unique_ptr<Vector3f[]> s;
-    std::unique_ptr<Point2f[]> uv;
-    std::shared_ptr<Texture<Float>> alphaMask, shadowAlphaMask;
-    std::vector<int> faceIndices;
-};
+//     // TriangleMesh Data
+//     const int nTriangles, nVertices;
+//     std::vector<int> vertexIndices;
+//     std::unique_ptr<Point3f[]> p;
+//     std::unique_ptr<Normal3f[]> n;
+//     std::unique_ptr<Vector3f[]> s;
+//     std::unique_ptr<Point2f[]> uv;
+//     std::shared_ptr<Texture<Float>> alphaMask, shadowAlphaMask;
+//     std::vector<int> faceIndices;
+// };
 
 class Triangle : public Shape {
   public:
@@ -79,8 +80,11 @@ class Triangle : public Shape {
         triMeshBytes += sizeof(*this);
         faceIndex = mesh->faceIndices.size() ? mesh->faceIndices[triNumber] : 0;
     }
+    int NumTriangles() const;
+    bool IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const;
     Bounds3f ObjectBound() const;
     Bounds3f WorldBound() const;
+    void GetUVs() const;
     bool Intersect(const Ray &ray, Float *tHit, SurfaceInteraction *isect,
                    bool testAlphaTexture = true) const;
     bool IntersectP(const Ray &ray, bool testAlphaTexture = true) const;
@@ -105,6 +109,10 @@ class Triangle : public Shape {
             uv[1] = Point2f(1, 0);
             uv[2] = Point2f(1, 1);
         }
+    }
+
+    Float sign (Point2f p1, Point2f p2, Point2f p3) const {
+      return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
     }
 
     // Triangle Private Data

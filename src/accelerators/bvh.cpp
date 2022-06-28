@@ -224,6 +224,19 @@ BVHAccel::BVHAccel(std::vector<std::shared_ptr<Primitive>> p,
     CHECK_EQ(totalNodes, offset);
 }
 
+std::vector<std::shared_ptr<Primitive>> BVHAccel::GetPrimitives() const {
+    return primitives;
+}
+
+bool BVHAccel::IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const {
+    std::cout << "BVH Accelerator get mesh" << std::endl;
+    return false;
+}
+
+int BVHAccel::NumTriangles() const {
+    return 0;
+}
+
 Bounds3f BVHAccel::WorldBound() const {
     return nodes ? nodes[0].bounds : Bounds3f();
 }

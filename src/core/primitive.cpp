@@ -73,6 +73,20 @@ TransformedPrimitive::TransformedPrimitive(std::shared_ptr<Primitive> &primitive
     primitiveMemory += sizeof(*this);
 }
 
+std::vector<std::shared_ptr<Primitive>> TransformedPrimitive::GetPrimitives() const {
+    std::cout << "Transformed primitive get primitives" << std::endl;
+    return {};
+}
+
+bool TransformedPrimitive::IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const {
+    std::cout << "Transformed primitive get mesh" << std::endl;
+    return false;
+}
+
+int TransformedPrimitive::NumTriangles() const {
+    return 0;
+}
+
 bool TransformedPrimitive::Intersect(const Ray &r,
                                      SurfaceInteraction *isect) const {
     // Compute _ray_ after transformation by _PrimitiveToWorld_
@@ -113,6 +127,19 @@ bool GeometricPrimitive::IntersectP(const Ray &r) const {
     return shape->IntersectP(r);
 }
 
+std::vector<std::shared_ptr<Primitive>> GeometricPrimitive::GetPrimitives() const {
+    std::cout << "Geometric primitive get primitives" << std::endl;
+    return {};
+}
+
+bool GeometricPrimitive::IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const {
+    return shape->IntersectUV(texel, p, isect);
+}
+
+int GeometricPrimitive::NumTriangles() const {
+    return shape->NumTriangles();
+}
+
 bool GeometricPrimitive::Intersect(const Ray &r,
                                    SurfaceInteraction *isect) const {
     Float tHit;
@@ -146,5 +173,10 @@ void GeometricPrimitive::ComputeScatteringFunctions(
                                              allowMultipleLobes);
     CHECK_GE(Dot(isect->n, isect->shading.n), 0.);
 }
+
+Spectrum GeometricPrimitive::ComputeLightMap(SurfaceInteraction &isect) const {
+    return Spectrum(0.f);
+    // return lightMap.Evaluate(isect).Clamp();
+};
 
 }  // namespace pbrt

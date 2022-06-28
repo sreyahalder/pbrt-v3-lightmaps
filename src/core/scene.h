@@ -61,6 +61,7 @@ class Scene {
                 infiniteLights.push_back(light);
         }
     }
+    std::vector<std::shared_ptr<Primitive>> GetPrimitives() const;
     const Bounds3f &WorldBound() const { return worldBound; }
     bool Intersect(const Ray &ray, SurfaceInteraction *isect) const;
     bool IntersectP(const Ray &ray) const;

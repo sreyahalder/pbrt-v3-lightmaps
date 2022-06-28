@@ -41,6 +41,7 @@
 // accelerators/bvh.h*
 #include "pbrt.h"
 #include "primitive.h"
+#include "shapes/triangle.h"
 #include <atomic>
 
 namespace pbrt {
@@ -63,6 +64,9 @@ class BVHAccel : public Aggregate {
              SplitMethod splitMethod = SplitMethod::SAH);
     Bounds3f WorldBound() const;
     ~BVHAccel();
+    std::vector<std::shared_ptr<Primitive>> GetPrimitives() const;
+    int NumTriangles() const;
+    bool IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const;
     bool Intersect(const Ray &ray, SurfaceInteraction *isect) const;
     bool IntersectP(const Ray &ray) const;
 

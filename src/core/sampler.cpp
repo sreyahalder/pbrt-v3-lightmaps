@@ -181,6 +181,7 @@ Float GlobalSampler::Get1D() {
     ProfilePhase _(Prof::GetSample);
     if (dimension >= arrayStartDim && dimension < arrayEndDim)
         dimension = arrayEndDim;
+    if (dimension > 999) dimension = arrayEndDim;
     return SampleDimension(intervalSampleIndex, dimension++);
 }
 

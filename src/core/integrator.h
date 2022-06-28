@@ -70,6 +70,9 @@ Spectrum EstimateDirect(const Interaction &it, const Point2f &uShading,
                         const Scene &scene, Sampler &sampler,
                         MemoryArena &arena, bool handleMedia = false,
                         bool specular = false);
+Spectrum JustDirect(const Interaction &it, const Scene &scene,
+                    MemoryArena &arena, Sampler &sampler,
+                    bool handleMedia = false, const Distribution1D *lightDistrib = nullptr);
 std::unique_ptr<Distribution1D> ComputeLightPowerDistribution(
     const Scene &scene);
 

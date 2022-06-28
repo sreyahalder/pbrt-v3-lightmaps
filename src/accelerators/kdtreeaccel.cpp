@@ -347,6 +347,20 @@ bool KdTreeAccel::Intersect(const Ray &ray, SurfaceInteraction *isect) const {
     return hit;
 }
 
+std::vector<std::shared_ptr<Primitive>> KdTreeAccel::GetPrimitives() const {
+    std::cout << "Get vertices kd tree accel; num primitives: " << primitives.size() << std::endl;
+    return primitives;
+};
+
+bool KdTreeAccel::IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const {
+    std::cout << "KD Accelerator get mesh" << std::endl;
+    return false;
+}
+
+int KdTreeAccel::NumTriangles() const {
+    return 0;
+}
+
 bool KdTreeAccel::IntersectP(const Ray &ray) const {
     ProfilePhase p(Prof::AccelIntersectP);
     // Compute initial parametric range of ray inside kd-tree extent

@@ -1,0 +1,444 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+ld: library not found for -lSystem
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+ld: library not found for -lc++
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+
+Performing C++ SOURCE FILE Test HAVE_CONSTEXPR failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_b3fe4/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_b3fe4.dir/build.make CMakeFiles/cmTC_b3fe4.dir/build
+Building CXX object CMakeFiles/cmTC_b3fe4.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_CONSTEXPR  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_b3fe4.dir/src.cxx.o -MF CMakeFiles/cmTC_b3fe4.dir/src.cxx.o.d -o CMakeFiles/cmTC_b3fe4.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:1:14: error: unknown type name 'constexpr'
+int main() { constexpr int x = 0; }
+             ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_b3fe4.dir/src.cxx.o] Error 1
+make: *** [cmTC_b3fe4/fast] Error 2
+
+
+Source file was:
+int main() { constexpr int x = 0; }
+Performing C++ SOURCE FILE Test HAVE_ALIGNAS failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_ca9c3/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_ca9c3.dir/build.make CMakeFiles/cmTC_ca9c3.dir/build
+Building CXX object CMakeFiles/cmTC_ca9c3.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_ALIGNAS  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_ca9c3.dir/src.cxx.o -MF CMakeFiles/cmTC_ca9c3.dir/src.cxx.o.d -o CMakeFiles/cmTC_ca9c3.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:1:16: error: expected unqualified-id
+struct alignas(32) Foo { char x; }; int main() { }
+               ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:1:16: error: expected ')'
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:1:15: note: to match this '('
+struct alignas(32) Foo { char x; }; int main() { }
+              ^
+2 errors generated.
+make[1]: *** [CMakeFiles/cmTC_ca9c3.dir/src.cxx.o] Error 1
+make: *** [cmTC_ca9c3/fast] Error 2
+
+
+Source file was:
+struct alignas(32) Foo { char x; }; int main() { }
+Performing C++ SOURCE FILE Test HAVE_ALIGNOF failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_19056/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_19056.dir/build.make CMakeFiles/cmTC_19056.dir/build
+Building CXX object CMakeFiles/cmTC_19056.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_ALIGNOF  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_19056.dir/src.cxx.o -MF CMakeFiles/cmTC_19056.dir/src.cxx.o.d -o CMakeFiles/cmTC_19056.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:1:36: error: expected '(' for function-style cast or type construction
+int main() { int x = alignof(double); }
+                             ~~~~~~^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_19056.dir/src.cxx.o] Error 1
+make: *** [cmTC_19056/fast] Error 2
+
+
+Source file was:
+int main() { int x = alignof(double); }
+Performing C++ SOURCE FILE Test HAVE_NONPOD_IN_UNIONS failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_15381/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_15381.dir/build.make CMakeFiles/cmTC_15381.dir/build
+Building CXX object CMakeFiles/cmTC_15381.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_NONPOD_IN_UNIONS  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_15381.dir/src.cxx.o -MF CMakeFiles/cmTC_15381.dir/src.cxx.o.d -o CMakeFiles/cmTC_15381.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:3:37: error: union member 'b' has a non-trivial default constructor
+struct Foo { union { int x[10]; Bar b; }; Foo() : b() { } };
+                                    ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:2:21: note: because type 'Bar' has a user-provided default constructor
+class Bar { public: Bar() { x = 0; } float x; };
+                    ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:3:51: error: member initializer 'b' does not name a non-static data member or base class
+struct Foo { union { int x[10]; Bar b; }; Foo() : b() { } };
+                                                  ^~~
+2 errors generated.
+make[1]: *** [CMakeFiles/cmTC_15381.dir/src.cxx.o] Error 1
+make: *** [cmTC_15381/fast] Error 2
+
+
+Source file was:
+
+class Bar { public: Bar() { x = 0; } float x; };
+struct Foo { union { int x[10]; Bar b; }; Foo() : b() { } };
+int main() { Foo f; }
+
+Performing C++ SOURCE FILE Test HAVE_DECLSPEC_NOINLINE failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_9c0d1/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_9c0d1.dir/build.make CMakeFiles/cmTC_9c0d1.dir/build
+Building CXX object CMakeFiles/cmTC_9c0d1.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_DECLSPEC_NOINLINE  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_9c0d1.dir/src.cxx.o -MF CMakeFiles/cmTC_9c0d1.dir/src.cxx.o.d -o CMakeFiles/cmTC_9c0d1.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:1:1: error: '__declspec' attributes are not enabled; use '-fdeclspec' or '-fms-extensions' to enable support for __declspec attributes
+__declspec(noinline) void foo() { }
+^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_9c0d1.dir/src.cxx.o] Error 1
+make: *** [cmTC_9c0d1/fast] Error 2
+
+
+Source file was:
+__declspec(noinline) void foo() { }
+int main() { }
+Performing C++ SOURCE FILE Test HAVE__ALIGNED_MALLOC failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_b0ee0/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_b0ee0.dir/build.make CMakeFiles/cmTC_b0ee0.dir/build
+Building CXX object CMakeFiles/cmTC_b0ee0.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE__ALIGNED_MALLOC  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_b0ee0.dir/src.cxx.o -MF CMakeFiles/cmTC_b0ee0.dir/src.cxx.o.d -o CMakeFiles/cmTC_b0ee0.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:2:10: fatal error: 'malloc.h' file not found
+#include <malloc.h>
+         ^~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_b0ee0.dir/src.cxx.o] Error 1
+make: *** [cmTC_b0ee0/fast] Error 2
+
+
+Source file was:
+
+#include <malloc.h>
+int main() { void * ptr = _aligned_malloc(1024, 32); }
+
+Performing C++ SOURCE FILE Test HAVE_MEMALIGN failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_28f2d/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_28f2d.dir/build.make CMakeFiles/cmTC_28f2d.dir/build
+Building CXX object CMakeFiles/cmTC_28f2d.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_MEMALIGN  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_28f2d.dir/src.cxx.o -MF CMakeFiles/cmTC_28f2d.dir/src.cxx.o.d -o CMakeFiles/cmTC_28f2d.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:2:10: fatal error: 'malloc.h' file not found
+#include <malloc.h>
+         ^~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_28f2d.dir/src.cxx.o] Error 1
+make: *** [cmTC_28f2d/fast] Error 2
+
+
+Source file was:
+
+#include <malloc.h>
+int main() {
+    void *ptr = memalign(32, 1024);
+} 
+Performing C++ SOURCE FILE Test HAVE_THREAD_LOCAL failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_bfc49/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_bfc49.dir/build.make CMakeFiles/cmTC_bfc49.dir/build
+Building CXX object CMakeFiles/cmTC_bfc49.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_THREAD_LOCAL  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_bfc49.dir/src.cxx.o -MF CMakeFiles/cmTC_bfc49.dir/src.cxx.o.d -o CMakeFiles/cmTC_bfc49.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:6:1: error: unknown type name 'thread_local'
+thread_local int x; int main() { }
+^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_bfc49.dir/src.cxx.o] Error 1
+make: *** [cmTC_bfc49/fast] Error 2
+
+
+Source file was:
+
+#ifdef __CYGWIN__
+// Hack to work around https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64697
+#error "No thread_local on cygwin"
+#endif  // __CYGWIN__
+thread_local int x; int main() { }
+
+Performing C++ SOURCE FILE Test HAVE_DECLSPEC_THREAD failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e491e/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_e491e.dir/build.make CMakeFiles/cmTC_e491e.dir/build
+Building CXX object CMakeFiles/cmTC_e491e.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DHAVE_DECLSPEC_THREAD  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_e491e.dir/src.cxx.o -MF CMakeFiles/cmTC_e491e.dir/src.cxx.o.d -o CMakeFiles/cmTC_e491e.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:2:1: error: '__declspec' attributes are not enabled; use '-fdeclspec' or '-fms-extensions' to enable support for __declspec attributes
+__declspec(thread) int x; int main() { }
+^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_e491e.dir/src.cxx.o] Error 1
+make: *** [cmTC_e491e/fast] Error 2
+
+
+Source file was:
+
+__declspec(thread) int x; int main() { }
+
+Determining if the include file syscall.h exists failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e848a/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_e848a.dir/build.make CMakeFiles/cmTC_e848a.dir/build
+Building C object CMakeFiles/cmTC_e848a.dir/CheckIncludeFile.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_e848a.dir/CheckIncludeFile.c.o -MF CMakeFiles/cmTC_e848a.dir/CheckIncludeFile.c.o.d -o CMakeFiles/cmTC_e848a.dir/CheckIncludeFile.c.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: 'syscall.h' file not found
+#include <syscall.h>
+         ^~~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_e848a.dir/CheckIncludeFile.c.o] Error 1
+make: *** [cmTC_e848a/fast] Error 2
+
+
+
+Determining if the include file ucontext.h exists failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_7b17f/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_7b17f.dir/build.make CMakeFiles/cmTC_7b17f.dir/build
+Building C object CMakeFiles/cmTC_7b17f.dir/CheckIncludeFile.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_7b17f.dir/CheckIncludeFile.c.o -MF CMakeFiles/cmTC_7b17f.dir/CheckIncludeFile.c.o.d -o CMakeFiles/cmTC_7b17f.dir/CheckIncludeFile.c.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+In file included from /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/ucontext.h:51:2: error: The deprecated ucontext routines require _XOPEN_SOURCE to be defined
+#error The deprecated ucontext routines require _XOPEN_SOURCE to be defined
+ ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_7b17f.dir/CheckIncludeFile.c.o] Error 1
+make: *** [cmTC_7b17f/fast] Error 2
+
+
+
+Determining if the include file ext/slist exists failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_c42b5/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_c42b5.dir/build.make CMakeFiles/cmTC_c42b5.dir/build
+Building CXX object CMakeFiles/cmTC_c42b5.dir/CheckIncludeFile.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_c42b5.dir/CheckIncludeFile.cxx.o -MF CMakeFiles/cmTC_c42b5.dir/CheckIncludeFile.cxx.o.d -o CMakeFiles/cmTC_c42b5.dir/CheckIncludeFile.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:10: fatal error: 'ext/slist' file not found
+#include <ext/slist>
+         ^~~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_c42b5.dir/CheckIncludeFile.cxx.o] Error 1
+make: *** [cmTC_c42b5/fast] Error 2
+
+
+
+Determining if the include file tr1/unordered_map exists failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e25fc/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_e25fc.dir/build.make CMakeFiles/cmTC_e25fc.dir/build
+Building CXX object CMakeFiles/cmTC_e25fc.dir/CheckIncludeFile.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_e25fc.dir/CheckIncludeFile.cxx.o -MF CMakeFiles/cmTC_e25fc.dir/CheckIncludeFile.cxx.o.d -o CMakeFiles/cmTC_e25fc.dir/CheckIncludeFile.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:10: fatal error: 'tr1/unordered_map' file not found
+#include <tr1/unordered_map>
+         ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_e25fc.dir/CheckIncludeFile.cxx.o] Error 1
+make: *** [cmTC_e25fc/fast] Error 2
+
+
+
+Determining if the include file tr1/unordered_set exists failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_295b1/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_295b1.dir/build.make CMakeFiles/cmTC_295b1.dir/build
+Building CXX object CMakeFiles/cmTC_295b1.dir/CheckIncludeFile.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_295b1.dir/CheckIncludeFile.cxx.o -MF CMakeFiles/cmTC_295b1.dir/CheckIncludeFile.cxx.o.d -o CMakeFiles/cmTC_295b1.dir/CheckIncludeFile.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:10: fatal error: 'tr1/unordered_set' file not found
+#include <tr1/unordered_set>
+         ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_295b1.dir/CheckIncludeFile.cxx.o] Error 1
+make: *** [cmTC_295b1/fast] Error 2
+
+
+
+Determining size of unsigned __int16 failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_f68a4/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_f68a4.dir/build.make CMakeFiles/cmTC_f68a4.dir/build
+Building C object CMakeFiles/cmTC_f68a4.dir/HAVE___UINT16.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_f68a4.dir/HAVE___UINT16.c.o -MF CMakeFiles/cmTC_f68a4.dir/HAVE___UINT16.c.o.d -o CMakeFiles/cmTC_f68a4.dir/HAVE___UINT16.c.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:29:12: error: expected ')'
+  ('0' + ((SIZE / 10000)%10)),
+           ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:31: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                              ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:29:12: note: to match this '('
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:21: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                    ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:30:12: error: expected ')'
+  ('0' + ((SIZE / 1000)%10)),
+           ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:31: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                              ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:30:12: note: to match this '('
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:21: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                    ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:31:12: error: expected ')'
+  ('0' + ((SIZE / 100)%10)),
+           ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:31: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                              ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:31:12: note: to match this '('
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:21: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                    ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:32:12: error: expected ')'
+  ('0' + ((SIZE / 10)%10)),
+           ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:31: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                              ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:32:12: note: to match this '('
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:21: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                    ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:33:12: error: expected ')'
+  ('0' +  (SIZE    % 10)),
+           ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:31: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                              ^
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:33:12: note: to match this '('
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:27:21: note: expanded from macro 'SIZE'
+#define SIZE (sizeof(unsigned __int16))
+                    ^
+5 errors generated.
+make[1]: *** [CMakeFiles/cmTC_f68a4.dir/HAVE___UINT16.c.o] Error 1
+make: *** [cmTC_f68a4/fast] Error 2
+
+
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CheckTypeSize/HAVE___UINT16.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__PPC64__)
+# define KEY '_','_','P','P','C','6','4','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__PPC__)
+# define KEY '_','_','P','P','C','_','_'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(unsigned __int16))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function get_static_proc_name exists in the unwind failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_61e74/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_61e74.dir/build.make CMakeFiles/cmTC_61e74.dir/build
+Building C object CMakeFiles/cmTC_61e74.dir/CheckFunctionExists.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=get_static_proc_name -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_61e74.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_61e74.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_61e74.dir/CheckFunctionExists.c.o -c /Applications/CMake.app/Contents/share/cmake-3.20/Modules/CheckFunctionExists.c
+Linking C executable cmTC_61e74
+/Applications/CMake.app/Contents/bin/cmake -E cmake_link_script CMakeFiles/cmTC_61e74.dir/link.txt --verbose=1
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=get_static_proc_name -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_61e74.dir/CheckFunctionExists.c.o -o cmTC_61e74  -lunwind 
+ld: library not found for -lunwind
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make[1]: *** [cmTC_61e74] Error 1
+make: *** [cmTC_61e74/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test HAVE___DECLSPEC failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_7b908/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_7b908.dir/build.make CMakeFiles/cmTC_7b908.dir/build
+Building C object CMakeFiles/cmTC_7b908.dir/src.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -DHAVE___DECLSPEC  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_7b908.dir/src.c.o -MF CMakeFiles/cmTC_7b908.dir/src.c.o.d -o CMakeFiles/cmTC_7b908.dir/src.c.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.c
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.c:2:1: error: '__declspec' attributes are not enabled; use '-fdeclspec' or '-fms-extensions' to enable support for __declspec attributes
+__declspec(selectany) int a;
+^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_7b908.dir/src.c.o] Error 1
+make: *** [cmTC_7b908/fast] Error 2
+
+
+Source file was:
+
+__declspec(selectany) int a;
+int main(void) { return 0; }
+
+Performing C++ SOURCE FILE Test STL_NO_NAMESPACE failed with the following output:
+Change Dir: /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1be5a/fast && /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_1be5a.dir/build.make CMakeFiles/cmTC_1be5a.dir/build
+Building CXX object CMakeFiles/cmTC_1be5a.dir/src.cxx.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DSTL_NO_NAMESPACE  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -MD -MT CMakeFiles/cmTC_1be5a.dir/src.cxx.o -MF CMakeFiles/cmTC_1be5a.dir/src.cxx.o.d -o CMakeFiles/cmTC_1be5a.dir/src.cxx.o -c /Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx
+/Users/halde/Documents/CS348K/project/pbrt-v3/build/CMakeFiles/CMakeTmp/src.cxx:3:1: error: no template named 'vector'; did you mean 'std::vector'?
+vector<int> t; int main() { }
+^~~~~~
+std::vector
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/vector:493:28: note: 'std::vector' declared here
+class _LIBCPP_TEMPLATE_VIS vector
+                           ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_1be5a.dir/src.cxx.o] Error 1
+make: *** [cmTC_1be5a/fast] Error 2
+
+
+Source file was:
+
+#include <vector>
+vector<int> t; int main() { }
+

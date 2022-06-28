@@ -44,6 +44,7 @@
 #include "interaction.h"
 #include "memory.h"
 #include "transform.h"
+#include "shapes/trianglemesh.h"
 
 namespace pbrt {
 
@@ -54,6 +55,13 @@ class Shape {
     Shape(const Transform *ObjectToWorld, const Transform *WorldToObject,
           bool reverseOrientation);
     virtual ~Shape();
+    virtual int NumTriangles() const {
+      return 0;
+    }
+    virtual bool IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const {
+      std::cout << "Get mesh from shape" << std::endl;
+      return false;
+    }
     virtual Bounds3f ObjectBound() const = 0;
     virtual Bounds3f WorldBound() const;
     virtual bool Intersect(const Ray &ray, Float *tHit,

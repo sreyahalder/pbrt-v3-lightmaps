@@ -168,6 +168,51 @@ bool WritePlyFile(const std::string &filename, int nTriangles,
     return true;
 }
 
+int Triangle::NumTriangles() const {
+    return mesh->nTriangles;
+}
+
+bool Triangle::IntersectUV(const Point2f &texel, Point3f *p, SurfaceInteraction *isect) const {
+    const Point3f &p0 = mesh->p[v[0]];
+    const Point3f &p1 = mesh->p[v[1]];
+    const Point3f &p2 = mesh->p[v[2]];
+    if (mesh->uv) {
+        Point2f uv[3];
+        GetUVs(uv);
+
+        // check if uv coordinate is inside triangle
+        Float d1, d2, d3;
+        bool has_neg, has_pos;
+        d1 = sign(texel, uv[0], uv[1]);
+        d2 = sign(texel, uv[1], uv[2]);
+        d3 = sign(texel, uv[2], uv[0]);
+        has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+        has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+        if (has_neg && has_pos) return false;
+
+
+        // compute barycentric coordinates
+        Float b0, b1, b2;
+        Vector2f v0 = uv[1] - uv[0], v1 = uv[2] - uv[0], v2 = texel - uv[0];
+        Float d00 = Dot(v0, v0);
+        Float d01 = Dot(v0, v1);
+        Float d11 = Dot(v1, v1);
+        Float d20 = Dot(v2, v0);
+        Float d21 = Dot(v2, v1);
+        Float denom = d00 * d11 - d01 * d01;
+        b1 = (d11 * d20 - d01 * d21) / denom;
+        b2 = (d00 * d21 - d01 * d20) / denom;
+        b0 = 1.0f - b1 - b2;
+        *p = b0 * p0 + b1 * p1 + b2 * p2;
+
+        Ray ray(Point3f(0, 0, 0), Normalize(Vector3f(*p)));
+        Float tHit;
+        return Intersect(ray, &tHit, isect, false);
+    }
+    return false;
+}
+
 Bounds3f Triangle::ObjectBound() const {
     // Get triangle vertices in _p0_, _p1_, and _p2_
     const Point3f &p0 = mesh->p[v[0]];
@@ -710,7 +755,7 @@ std::vector<std::shared_ptr<Shape>> CreateTriangleMeshShape(
     const int *faceIndices = params.FindInt("faceIndices", &nfi);
     if (faceIndices && nfi != nvi / 3) {
         Error("Number of face indices, %d, doesn't match number of faces, %d",
-              nfi, nvi / 3);
+              nfi, nvi / 3); 
         faceIndices = nullptr;
     }
 
